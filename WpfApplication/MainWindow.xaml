@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Multiple Renamer" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="53"/>
+            <RowDefinition/>
+            <RowDefinition Height="53"/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <TextBlock Margin="10" FontSize="14" VerticalAlignment="Center">Нова назва:</TextBlock>
+            <TextBox Name="tb_newName" FontSize="14" Margin="10" TextWrapping="NoWrap" MaxLines="1" TextChanged="tb_newName_TextChanged"/>
+        </DockPanel>
+        <ListView Name="listView" ItemsSource="{Binding FileCollection}" Margin="10" Grid.Row="1" FontSize="14" AllowDrop="True" Drop="ListView_Drop">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Поточна назва" DisplayMemberBinding="{Binding CurrentName}"/>
+                    <GridViewColumn Header="Майбутня назва" DisplayMemberBinding="{Binding NewName}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Перейменувати" FontSize="14" MaxWidth="200" Grid.Row="2" Click="Button_Click" Margin="10, 10"/>
+
     </Grid>
 </Window>
